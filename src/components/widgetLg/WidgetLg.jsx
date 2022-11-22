@@ -33,7 +33,7 @@ export default function WidgetLg() {
         </tr>
         {orders.map(order=>(
 
-          <tr className="widgetLgTr">
+          <tr className="widgetLgTr" key={order._id}>
           <td className="widgetLgUser">
           
             <span className="widgetLgName">{order.userId}</span>
