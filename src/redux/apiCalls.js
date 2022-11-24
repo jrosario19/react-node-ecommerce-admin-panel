@@ -1,7 +1,7 @@
 import { loginFailure, loginStart, loginSuccess } from "./userRedux"
 import axios from 'axios'
-import { publicRequest } from '../../src/requestMethods'
-import { getProductFailure, getProductStart, getProductSuccess } from "./productRedux";
+import { publicRequest, userRequest } from '../../src/requestMethods'
+import { getProductFailure, getProductStart, getProductSuccess, deleteProductStart, deleteProductSuccess, deleteProductFailure} from "./productRedux";
 
 export const login = async (dispatch, user)=>{
     dispatch(loginStart());
@@ -22,5 +22,16 @@ export const getProducts = async (dispatch)=>{
         dispatch(getProductSuccess(res.data))
     } catch (error) {
         dispatch(getProductFailure())
+    }
+}
+
+export const deleteProduct = async (id, dispatch)=>{
+    dispatch(deleteProductStart());
+    try {
+        //const res = await axios.post("https://ecommerce-jfrs.herokuapp.com/api/auth/login",user);
+        const res = await userRequest.delete(`/products/${id}`);
+        dispatch(deleteProductSuccess(id))
+    } catch (error) {
+        dispatch(deleteProductFailure())
     }
 }
